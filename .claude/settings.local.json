@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(npm install *)",
+      "Bash(npx vite *)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(netstat -ano)",
+      "Bash(findstr :3000)",
+      "Bash(taskkill /PID 26912 /F)",
+      "Bash(taskkill /PID 21236 /F)",
+      "PowerShell(Stop-Process -Id 26912 -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Id 21236 -Force -ErrorAction SilentlyContinue)",
+      "Bash(node -e ' *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(git config *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
