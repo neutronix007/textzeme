@@ -33,12 +33,12 @@ export default function HeroSection() {
               className="absolute bottom-0 left-0 right-0 flex justify-center px-8"
               style={{ transform: 'translateY(8%)' }}
             >
-              <div className="w-full max-w-[500px] md:max-w-[640px]">
+              <div className="w-full max-w-[500px] md:max-w-[640px]" style={{ aspectRatio: '1 / 1' }}>
                 <DotLottieReact
                   src={LOTTIE_URL}
                   autoplay
                   loop
-                  style={{ width: '100%' }}
+                  style={{ width: '100%', height: '100%' }}
                 />
               </div>
             </div>
@@ -144,19 +144,19 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
           className="relative w-full bg-zeme-gray/50 rounded-[48px] overflow-hidden border border-neutral-100 mb-6"
-          style={{ height: 'calc(100vh - 430px)', minHeight: '360px' }}
+          style={{ height: '65dvh', minHeight: '500px' }}
         >
           {/* Same absolute-bottom approach as mobile */}
           <div
             className="absolute bottom-0 left-0 right-0 flex justify-center px-8"
             style={{ transform: 'translateY(8%)' }}
           >
-            <div className="w-full max-w-[800px]">
+            <div className="w-full max-w-[900px]" style={{ aspectRatio: '1 / 1' }}>
               <DotLottieReact
                 src={LOTTIE_URL}
                 autoplay
                 loop
-                style={{ width: '100%' }}
+                style={{ width: '100%', height: '100%' }}
               />
             </div>
           </div>
