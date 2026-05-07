@@ -106,12 +106,19 @@ export default function FooterNew() {
       </div>
 
       {/* ── Watermark ─────────────────────────────────────────────────── */}
-      {/* SVG is 1278×387 (3.3:1). Setting width:130vw means it always
-          exceeds the viewport, bleeding off the right edge. The footer's
-          overflow:hidden clips it cleanly on both sides.                 */}
+      {/* SVG is 1278×387 (ratio 0.3028). At width:130vw its natural height
+          is ~39.4vw. The wrapper is capped at half that (19.7vw) with
+          overflow:hidden so only the top half of the letters is visible —
+          the bottom half is clipped by the page's bottom edge.
+          No left padding: the "Z" starts flush at the viewport left edge.
+          The footer's own overflow:hidden clips the right bleed.          */}
       <div
         className="pointer-events-none select-none"
-        style={{ marginTop: '-0.25rem', paddingLeft: '1.5rem' }}
+        style={{
+          marginTop: '1rem',
+          height: 'calc(130vw * 0.1514)',   /* = 19.7vw  ≈  half SVG height */
+          overflow: 'hidden',
+        }}
         aria-hidden
       >
         <img
@@ -121,6 +128,7 @@ export default function FooterNew() {
           style={{
             width: '130vw',
             display: 'block',
+            opacity: 0.45,
           }}
         />
       </div>
