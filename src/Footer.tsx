@@ -28,7 +28,10 @@ const NAV_LINKS = [
 // ─── Footer ───────────────────────────────────────────────────────────────────
 export default function Footer() {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(wrapperRef, { amount: 0.05, once: false });
+  // margin: "0px 0px 300px 0px" pre-triggers the animation 300px before the
+  // footer enters the viewport — eliminating the blank flash on scroll.
+  // once: true means it animates in once and stays visible.
+  const inView = useInView(wrapperRef, { amount: 0.01, once: true, margin: "0px 0px 300px 0px" });
 
   return (
     /*
@@ -62,12 +65,12 @@ export default function Footer() {
           animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.88 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
           style={{
-            WebkitTextStroke: '1px rgba(0,0,0,0.04)',
-            backgroundImage: 'linear-gradient(180deg, rgba(0,0,0,0.07) 0%, transparent 65%)',
+            WebkitTextStroke: '1px rgba(0,0,0,0.07)',
+            backgroundImage: 'linear-gradient(180deg, rgba(0,0,0,0.13) 0%, transparent 70%)',
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
           }}
-          className="absolute -bottom-[4vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none text-[26vw] leading-[0.75] font-black tracking-[-0.05em] text-transparent"
+          className="absolute -bottom-[3vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none text-[38vw] leading-[0.75] font-black tracking-[-0.05em] text-transparent"
         >
           ZEME
         </motion.div>
