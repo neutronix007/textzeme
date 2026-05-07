@@ -5,10 +5,13 @@
 
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import HeroV1 from './HeroV1';
-import HeroV2 from './HeroV2';
-import Footer from './Footer';
+
+// HeroV2 is not the default layout — lazy-load so it doesn't bloat the
+// initial bundle. Footer is always below the fold so it can be deferred too.
+const HeroV2  = lazy(() => import('./HeroV2'));
+const Footer  = lazy(() => import('./Footer'));
 
 type Layout = 'v1' | 'v2';
 
@@ -149,12 +152,16 @@ export default function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <HeroV2 />
+            <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+              <HeroV2 />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <Footer />
+      <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+        <Footer />
+      </Suspense>
 
     </div>
   );
