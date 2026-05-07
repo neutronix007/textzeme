@@ -252,10 +252,8 @@ export default function StatsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
-              className="lightsweep-card relative rounded-[22px] border border-neutral-200/70 bg-white p-5 flex flex-col gap-5 overflow-hidden"
+              className="lightsweep-card relative rounded-[22px] bg-white p-5 flex flex-col gap-5 overflow-hidden"
             >
-              {/* Top edge shimmer */}
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent pointer-events-none" />
 
               {/* Stat + label */}
               <div>
@@ -277,7 +275,7 @@ export default function StatsSection() {
 
               {/* Icon + copy */}
               <div className="flex items-start gap-3">
-                <div className="w-7 h-7 rounded-lg bg-zeme-gray border border-neutral-200/60 flex items-center justify-center text-neutral-400 shrink-0 mt-0.5">
+                <div className="w-7 h-7 rounded-lg bg-zeme-gray flex items-center justify-center text-neutral-400 shrink-0 mt-0.5">
                   <card.Icon />
                 </div>
                 <p className="text-neutral-500 text-[13px] leading-[1.7]">{card.copy}</p>
