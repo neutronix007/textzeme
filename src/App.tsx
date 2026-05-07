@@ -8,16 +8,18 @@ import { motion, AnimatePresence } from 'motion/react';
 import { lazy, Suspense, useState } from 'react';
 import HeroV1 from './HeroV1';
 
-// HeroV2 is not the default layout — lazy-load so it doesn't bloat the
-// initial bundle. Footer is always below the fold so it can be deferred too.
+// Non-default layouts and below-fold sections are lazy-loaded so they don't
+// bloat the initial bundle.
 const HeroV2  = lazy(() => import('./HeroV2'));
+const HeroV3  = lazy(() => import('./HeroV3'));
 const Footer  = lazy(() => import('./Footer'));
 
-type Layout = 'v1' | 'v2';
+type Layout = 'v1' | 'v2' | 'v3';
 
 const layouts: { id: Layout; label: string; sub: string }[] = [
   { id: 'v1', label: 'Layout 1', sub: 'Side-by-side' },
   { id: 'v2', label: 'Layout 2', sub: 'Centered + Carousel' },
+  { id: 'v3', label: 'Layout 3', sub: 'Blue hero + Clouds' },
 ];
 
 export default function App() {
@@ -144,7 +146,7 @@ export default function App() {
           >
             <HeroV1 />
           </motion.div>
-        ) : (
+        ) : active === 'v2' ? (
           <motion.div
             key="v2"
             initial={{ opacity: 0 }}
@@ -154,6 +156,18 @@ export default function App() {
           >
             <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
               <HeroV2 />
+            </Suspense>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="v3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+              <HeroV3 />
             </Suspense>
           </motion.div>
         )}
