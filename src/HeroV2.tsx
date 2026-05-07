@@ -83,12 +83,14 @@ export default function HeroV2() {
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
           className="relative flex justify-center mb-6 md:mb-8"
         >
-          <DotLottieReact
-            src={LOTTIE_URL}
-            autoplay
-            loop
-            style={{ width: '100%', maxWidth: '620px', height: 'auto' }}
-          />
+          <div style={{ width: '100%', maxWidth: '540px', aspectRatio: '1 / 1' }}>
+            <DotLottieReact
+              src={LOTTIE_URL}
+              autoplay
+              loop
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
           {/* Bottom fade into white */}
           <div
             className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
