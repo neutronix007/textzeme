@@ -1,28 +1,18 @@
-import { useEffect, useRef, useState, type FC } from 'react';
-import { motion, useInView } from 'motion/react';
+import { useEffect, useState, type FC } from 'react';
+import { motion } from 'motion/react';
 
-// ── Shared SVG gradient definitions ───────────────────────────────────────
-// Rendered as a zero-size hidden SVG so gradient IDs are globally available
-// to every SVG on the page via fill="url(#id)".
+// ── Shared SVG gradient definitions ──────────────────────────────────────
 const SvgDefs: FC = () => (
   <svg style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }} aria-hidden>
     <defs>
-      {/* Person — winner (blue, top-light → deep) */}
       <linearGradient id="zs-grad-winner" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor="#93C5FD" />
         <stop offset="100%" stopColor="#1D4ED8" />
       </linearGradient>
-      {/* Person — loser (light gray → mid gray) */}
       <linearGradient id="zs-grad-loser" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor="#E4E4E7" />
         <stop offset="100%" stopColor="#A1A1AA" />
       </linearGradient>
-      {/* Progress bar (left-light-blue → right-zeme-blue) */}
-      <linearGradient id="zs-grad-progress" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stopColor="#93C5FD" />
-        <stop offset="100%" stopColor="#0072F5" />
-      </linearGradient>
-      {/* Radar center dot (mint → deep emerald) */}
       <radialGradient id="zs-grad-radar-dot" cx="50%" cy="35%" r="60%">
         <stop offset="0%" stopColor="#A7F3D0" />
         <stop offset="100%" stopColor="#059669" />
@@ -89,11 +79,10 @@ const CountdownViz: FC = () => {
   const m = Math.floor((secs % 3600) / 60);
   const s = secs % 60;
   const pad = (n: number) => String(n).padStart(2, '0');
-  const progress = secs / 7200; // 1 → 0
+  const progress = secs / 7200;
 
   return (
     <div className="flex flex-col items-center gap-3 w-full">
-      {/* Digits — gradient text, flips red on flash */}
       <p
         className={`font-mono text-[2.6rem] font-bold tracking-[0.06em] transition-colors duration-150 ${
           flash
@@ -104,7 +93,6 @@ const CountdownViz: FC = () => {
         {pad(h)}:{pad(m)}:{pad(s)}
       </p>
 
-      {/* Progress bar */}
       <div className="w-40 h-[3px] bg-neutral-100 rounded-full overflow-hidden">
         {flash ? (
           <div className="h-full w-full bg-red-400 rounded-full" />
@@ -120,7 +108,6 @@ const CountdownViz: FC = () => {
         )}
       </div>
 
-      {/* Gone pill */}
       <div className="h-5 flex items-center justify-center">
         {flash && (
           <motion.span
@@ -167,7 +154,7 @@ const PeopleViz: FC = () => (
   </div>
 );
 
-// Ring colour stops: emerald → teal → cyan → sky — shifts as rings expand
+// Rings shift colour as they expand: emerald → teal → cyan → sky
 const RING_COLORS = ['#34D399', '#2DD4BF', '#22D3EE', '#60A5FA'];
 
 // ── Card 3: Radar ─────────────────────────────────────────────────────────
@@ -177,22 +164,18 @@ const RadarViz: FC = () => (
       <motion.div
         key={i}
         className="absolute rounded-full"
-        style={{
-          width: 18,
-          height: 18,
-          border: `1.5px solid ${color}`,
-          opacity: 0,
-        }}
-        animate={{ scale: [0.4, 5.5], opacity: [0.75, 0] }}
+        style={{ width: 18, height: 18, border: `1.5px solid ${color}` }}
+        initial={{ opacity: 0, scale: 0.3 }}
+        animate={{ scale: [0.3, 5.5], opacity: [0, 0.65, 0] }}
         transition={{
           duration: 2.8,
           repeat: Infinity,
           delay: i * 0.7,
           ease: 'easeOut',
+          times: [0, 0.3, 1],
         }}
       />
     ))}
-    {/* Centre dot — SVG radial gradient fill */}
     <svg
       width="16"
       height="16"
@@ -206,13 +189,7 @@ const RadarViz: FC = () => (
 );
 
 // ── Card definitions ──────────────────────────────────────────────────────
-type CardDef = {
-  stat: string;
-  label: string;
-  copy: string;
-  Viz: FC;
-  Icon: FC;
-};
+type CardDef = { stat: string; label: string; copy: string; Viz: FC; Icon: FC };
 
 const CARDS: CardDef[] = [
   {
@@ -225,14 +202,14 @@ const CARDS: CardDef[] = [
   {
     stat: '6%',
     label: 'The renters who win',
-    copy: "Only 6% of renters land their ideal apartment on the first search. Zeme puts you in that group by making sure you're always first.",
+    copy: "Only 6% of renters land their ideal apartment on the first try. Zeme puts you in that group — you're always notified first.",
     Viz: PeopleViz,
     Icon: UsersIcon,
   },
   {
     stat: '24/7',
     label: 'Zeme never clocks out',
-    copy: "While you're sleeping, working, or living your life — Zeme is scanning every source, every minute. You'll never miss a listing again.",
+    copy: "While you're sleeping, working, or living your life — Zeme scans every source, every minute. You'll never miss a listing again.",
     Viz: RadarViz,
     Icon: SignalIcon,
   },
@@ -240,23 +217,25 @@ const CARDS: CardDef[] = [
 
 // ── Section ───────────────────────────────────────────────────────────────
 export default function StatsSection() {
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.15 });
-
   return (
-    <section ref={ref} className="bg-zeme-gray/50 py-20 md:py-28 px-6">
+    <section className="bg-zeme-gray/50 py-20 md:py-28 px-6">
       <SvgDefs />
       <div className="max-w-[1400px] mx-auto">
 
         {/* Heading */}
         <motion.div
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12 md:mb-16"
         >
-          <h2 className="font-serif italic text-[2.2rem] md:text-[3rem] lg:text-[3.6rem] leading-[0.92] tracking-[-0.03em] bg-gradient-to-b from-[#2b2b2b] to-[#888888] bg-clip-text text-transparent mb-4">
-            The NYC rental market doesn't wait.<br className="hidden sm:block" />{' '}
-            Neither does Zeme.
+          <h2 className="font-serif italic text-[2.2rem] md:text-[3rem] lg:text-[3.6rem] leading-[0.92] tracking-[-0.03em] text-neutral-900 mb-4">
+            The{' '}
+            <span className="text-zeme-blue">NYC rental market</span>
+            {' '}doesn't wait.
+            <br className="hidden sm:block" />
+            {' '}Neither does Zeme.
           </h2>
           <p className="text-neutral-500 text-sm md:text-base leading-[1.65] max-w-[480px]">
             Every day thousands of great apartments are listed and gone before most renters even open
@@ -269,12 +248,14 @@ export default function StatsSection() {
           {CARDS.map((card, i) => (
             <motion.div
               key={card.stat}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.12 + i * 0.1 }}
-              className="lightsweep-card relative rounded-[22px] border border-neutral-200/70 bg-white p-5 flex flex-col gap-5 shadow-sm hover:shadow-md transition-shadow duration-300"
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
+              className="lightsweep-card relative rounded-[22px] border border-neutral-200/70 bg-white p-5 flex flex-col gap-5 overflow-hidden"
             >
               {/* Top edge shimmer */}
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent pointer-events-none rounded-t-[22px]" />
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent pointer-events-none" />
 
               {/* Stat + label */}
               <div>
@@ -286,8 +267,8 @@ export default function StatsSection() {
                 </p>
               </div>
 
-              {/* Animated visual */}
-              <div className="flex items-center justify-center flex-1 py-3 min-h-[120px]">
+              {/* Animated visual — fixed height so all cards align */}
+              <div className="flex items-center justify-center h-[130px]">
                 <card.Viz />
               </div>
 
