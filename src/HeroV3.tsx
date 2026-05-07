@@ -7,7 +7,7 @@ export default function HeroV3() {
   return (
     <div className="bg-white">
 
-      {/* ── Text + buttons ── white background, constrained width ─────── */}
+      {/* ── Text + buttons ─────────────────────────────────────────────── */}
       <div className="max-w-[1400px] mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -24,7 +24,6 @@ export default function HeroV3() {
             refreshing, no more missing the ideal listing.
           </p>
 
-          {/* Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -48,7 +47,10 @@ export default function HeroV3() {
         </motion.div>
       </div>
 
-      {/* ── Full-bleed blue hero box ────────────────────────────────────── */}
+      {/* ── Full-bleed blue section ─────────────────────────────────────
+          Rounded top corners. Phone anchored bottom-0 + translateY(8%)
+          — same confirmed approach as Layout 1. Overflow hidden clips
+          the whitespace at the top of the 1148×1148 Lottie square.      */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -56,55 +58,59 @@ export default function HeroV3() {
         className="relative overflow-hidden"
         style={{
           background: '#F0F7FF',
-          minHeight: 'clamp(420px, 65dvh, 780px)',
+          minHeight: 'clamp(500px, 72dvh, 880px)',
           borderRadius: '48px 48px 0 0',
         }}
       >
-
-        {/* Cloud left — hidden on mobile, visible md+ */}
+        {/* Cloud left — tablet+ only */}
         <motion.img
           src="/cloud%201.png"
           alt=""
           aria-hidden
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.35 }}
+          transition={{ duration: 1.1, ease: 'easeOut', delay: 0.4 }}
           className="absolute hidden md:block pointer-events-none select-none"
           style={{
             left: 0,
-            top: '12%',
-            width: 'clamp(180px, 22vw, 320px)',
+            top: '8%',
+            width: 'clamp(220px, 26vw, 420px)',
             zIndex: 10,
           }}
         />
 
-        {/* Cloud right — hidden on mobile, visible md+ */}
+        {/* Cloud right — tablet+ only */}
         <motion.img
           src="/cloud%202.png"
           alt=""
           aria-hidden
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.35 }}
+          transition={{ duration: 1.1, ease: 'easeOut', delay: 0.4 }}
           className="absolute hidden md:block pointer-events-none select-none"
           style={{
             right: 0,
-            top: '12%',
-            width: 'clamp(180px, 22vw, 320px)',
+            top: '8%',
+            width: 'clamp(220px, 26vw, 420px)',
             zIndex: 10,
           }}
         />
 
-        {/* Phone — absolute bottom-0 + translateY(8%) keeps it anchored
-            to the box bottom exactly as in Layout 1 (confirmed working). */}
+        {/* Phone — absolute bottom-0 + translateY(8%).
+            The Lottie canvas is 1148×1148 square; the phone occupies the
+            centre. Making the container large means the phone itself is large.
+            translateY(8%) clips the below-phone whitespace out of the bottom
+            while overflow:hidden on the parent clips top whitespace.
+            Horizontal padding prevents the phone touching screen edges on
+            small devices; removed on xl so maxWidth alone governs the size. */}
         <div
-          className="absolute bottom-0 left-0 right-0 flex justify-center"
+          className="absolute bottom-0 left-0 right-0 flex justify-center px-6 sm:px-10 md:px-16 xl:px-0"
           style={{ transform: 'translateY(8%)', zIndex: 20 }}
         >
           <div
-            className="w-full px-8 md:px-16 lg:px-0"
             style={{
-              maxWidth: 'clamp(320px, 55vw, 720px)',
+              width: '100%',
+              maxWidth: 'clamp(340px, 68vw, 920px)',
               aspectRatio: '1 / 1',
             }}
           >
@@ -121,7 +127,7 @@ export default function HeroV3() {
         <div
           className="absolute bottom-0 left-0 w-full pointer-events-none"
           style={{
-            height: 'clamp(80px, 12%, 140px)',
+            height: 'clamp(80px, 14%, 160px)',
             background: 'linear-gradient(to bottom, transparent, white)',
             zIndex: 30,
           }}

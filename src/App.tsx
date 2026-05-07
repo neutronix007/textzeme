@@ -173,9 +173,12 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
-        <Footer />
-      </Suspense>
+      {/* Footer only shown on Layout 1 — hidden on v2/v3 until finalised */}
+      {active === 'v1' && (
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+      )}
 
     </div>
   );
