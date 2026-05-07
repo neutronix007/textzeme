@@ -120,32 +120,34 @@ export default function Footer() {
         <motion.div
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-          className="relative z-20 w-full pb-8 px-6 md:px-12 grid grid-cols-3 items-center"
+          className="relative z-20 w-full pb-8 px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 items-center gap-4 md:gap-0"
         >
-          {/* Left — copyright */}
-          <p className="text-neutral-400 text-[10px] md:text-xs font-semibold tracking-widest uppercase">
+          {/* Copyright — centered on mobile, left-aligned on desktop */}
+          <p className="text-neutral-400 text-[10px] md:text-xs font-semibold tracking-widest uppercase text-center md:text-left">
             © 2026 Zeme AI. All rights reserved.
           </p>
 
-          {/* Centre — built with love */}
-          <div className="flex items-center justify-center gap-2">
-            <span className="text-neutral-400 text-[10px] md:text-xs font-bold uppercase tracking-widest">
-              Built with
-            </span>
-            <motion.span
-              animate={{ scale: [1, 1.3, 1, 1.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="text-red-500 inline-block leading-none text-sm"
-            >
-              ❤
-            </motion.span>
-            <span className="text-neutral-400 text-[10px] md:text-xs font-bold uppercase tracking-widest">
-              for Real Estate
-            </span>
+          {/* Centre — built with love pill, hidden on mobile */}
+          <div className="hidden md:flex items-center justify-center">
+            <div className="bg-neutral-100 hover:bg-neutral-200 border border-neutral-200/70 transition-colors px-5 py-2.5 rounded-full flex items-center gap-2">
+              <span className="text-neutral-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">
+                Built with
+              </span>
+              <motion.span
+                animate={{ scale: [1, 1.3, 1, 1.3, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="text-red-500 inline-block leading-none text-sm"
+              >
+                ❤
+              </motion.span>
+              <span className="text-neutral-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">
+                for Real Estate
+              </span>
+            </div>
           </div>
 
-          {/* Right — back to top */}
-          <div className="flex justify-end">
+          {/* Right — back to top arrow, hidden on mobile */}
+          <div className="hidden md:flex justify-end">
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
