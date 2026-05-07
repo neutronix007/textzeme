@@ -12,14 +12,16 @@ import HeroV1 from './HeroV1';
 // bloat the initial bundle.
 const HeroV2  = lazy(() => import('./HeroV2'));
 const HeroV3  = lazy(() => import('./HeroV3'));
+const HeroV4  = lazy(() => import('./HeroV4'));
 const Footer  = lazy(() => import('./Footer'));
 
-type Layout = 'v1' | 'v2' | 'v3';
+type Layout = 'v1' | 'v2' | 'v3' | 'v4';
 
 const layouts: { id: Layout; label: string; sub: string }[] = [
   { id: 'v1', label: 'Layout 1', sub: 'Side-by-side' },
   { id: 'v2', label: 'Layout 2', sub: 'Centered + Carousel' },
   { id: 'v3', label: 'Layout 3', sub: 'Blue hero + Clouds' },
+  { id: 'v4', label: 'Layout 4', sub: 'Split + Phone' },
 ];
 
 export default function App() {
@@ -158,7 +160,7 @@ export default function App() {
               <HeroV2 />
             </Suspense>
           </motion.div>
-        ) : (
+        ) : active === 'v3' ? (
           <motion.div
             key="v3"
             initial={{ opacity: 0 }}
@@ -168,6 +170,18 @@ export default function App() {
           >
             <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
               <HeroV3 />
+            </Suspense>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="v4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+              <HeroV4 />
             </Suspense>
           </motion.div>
         )}
