@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-const LOTTIE_URL = '/Final-Scene-Cut-at-map 3x.json';
+const LOTTIE_URL = '/3x Final-Scene-Cut-at-map 3x.json';
 
 const apartments = [
   {
