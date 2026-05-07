@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { DotLottiePlayer } from '@dotlottie/react-player';
 
-const LOTTIE_URL = '/Final-Scene-Cut-at-map.json';
+const LOTTIE_URL = '/2x Final-Scene-Cut-at-map (2).json';
 
 export default function HeroSection() {
   return (
