@@ -13,7 +13,8 @@ import HeroV1 from './HeroV1';
 const HeroV2  = lazy(() => import('./HeroV2'));
 const HeroV3  = lazy(() => import('./HeroV3'));
 const HeroV4  = lazy(() => import('./HeroV4'));
-const Footer  = lazy(() => import('./Footer'));
+// const Footer = lazy(() => import('./Footer')); // original — kept for reference
+const Footer  = lazy(() => import('./FooterNew'));
 
 type Layout = 'v1' | 'v2' | 'v3' | 'v4';
 
