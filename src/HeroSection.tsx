@@ -30,7 +30,7 @@ export default function HeroSection() {
               pulling the phone flush with the box bottom.
             */}
             <div
-              className="absolute bottom-0 left-0 right-0 flex justify-center px-4"
+              className="absolute bottom-0 left-0 right-0 flex justify-center px-8"
               style={{ transform: 'translateY(8%)' }}
             >
               <div className="w-full max-w-[500px] md:max-w-[640px]">
