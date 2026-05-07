@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { DotLottiePlayer } from '@dotlottie/react-player';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const LOTTIE_URL = '/2x Final-Scene-Cut-at-map (2).json';
 
@@ -34,7 +34,7 @@ export default function HeroSection() {
               style={{ transform: 'translateY(8%)' }}
             >
               <div className="w-full max-w-[500px] md:max-w-[640px]">
-                <DotLottiePlayer
+                <DotLottieReact
                   src={LOTTIE_URL}
                   autoplay
                   loop
@@ -152,7 +152,7 @@ export default function HeroSection() {
             style={{ transform: 'translateY(8%)' }}
           >
             <div className="w-full max-w-[800px]">
-              <DotLottiePlayer
+              <DotLottieReact
                 src={LOTTIE_URL}
                 autoplay
                 loop
