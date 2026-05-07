@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
-import { DotLottiePlayer } from '@dotlottie/react-player';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-const LOTTIE_URL = '/Final-Scene-Cut-at-map.json';
+const LOTTIE_URL = '/1xx Final-Scene-Cut-at-map (2).json';
 
 const apartments = [
   {
@@ -83,11 +83,11 @@ export default function HeroV2() {
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
           className="relative flex justify-center mb-6 md:mb-8"
         >
-          <DotLottiePlayer
+          <DotLottieReact
             src={LOTTIE_URL}
             autoplay
             loop
-            className="w-full max-w-[380px] md:max-w-[520px] lg:max-w-[620px] h-[400px] md:h-[560px] lg:h-[640px]"
+            style={{ width: '100%', maxWidth: '620px', height: 'auto' }}
           />
           {/* Bottom fade into white */}
           <div
