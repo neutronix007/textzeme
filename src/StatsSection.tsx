@@ -189,7 +189,15 @@ const RadarViz: FC = () => (
 );
 
 // ── Card definitions ──────────────────────────────────────────────────────
-type CardDef = { stat: string; label: string; copy: string; Viz: FC; Icon: FC };
+type CardDef = {
+  stat: string;
+  label: string;
+  copy: string;
+  Viz: FC;
+  Icon: FC;
+  iconBg: string;
+  iconColor: string;
+};
 
 const CARDS: CardDef[] = [
   {
@@ -198,6 +206,8 @@ const CARDS: CardDef[] = [
     copy: "The best NYC apartments are gone in under 2 hours. Most renters find out about them after they're already taken.",
     Viz: CountdownViz,
     Icon: ClockIcon,
+    iconBg: 'bg-blue-50',
+    iconColor: 'text-zeme-blue',
   },
   {
     stat: '6%',
@@ -205,6 +215,8 @@ const CARDS: CardDef[] = [
     copy: "Only 6% of renters land their ideal apartment on the first try. Zeme puts you in that group — you're always notified first.",
     Viz: PeopleViz,
     Icon: UsersIcon,
+    iconBg: 'bg-blue-50',
+    iconColor: 'text-zeme-blue',
   },
   {
     stat: '24/7',
@@ -212,6 +224,8 @@ const CARDS: CardDef[] = [
     copy: "While you're sleeping, working, or living your life — Zeme scans every source, every minute. You'll never miss a listing again.",
     Viz: RadarViz,
     Icon: SignalIcon,
+    iconBg: 'bg-emerald-50',
+    iconColor: 'text-emerald-600',
   },
 ];
 
@@ -237,7 +251,7 @@ export default function StatsSection() {
             <br className="hidden sm:block" />
             {' '}Neither does Zeme.
           </h2>
-          <p className="text-neutral-500 text-sm md:text-base leading-[1.65] max-w-[480px]">
+          <p className="text-sm md:text-base text-[#7D7D7D] leading-[1.5] font-medium max-w-[480px]">
             Every day thousands of great apartments are listed and gone before most renters even open
             their phones. Here's the reality — and why Zeme exists.
           </p>
@@ -257,7 +271,7 @@ export default function StatsSection() {
 
               {/* Stat + label */}
               <div>
-                <p className="font-sans text-[2.6rem] font-bold leading-[1] tracking-tight bg-gradient-to-b from-[#2b2b2b] to-[#888888] bg-clip-text text-transparent">
+                <p className="font-serif italic text-[2.6rem] leading-[1] tracking-tight bg-gradient-to-b from-[#2b2b2b] to-[#888888] bg-clip-text text-transparent">
                   {card.stat}
                 </p>
                 <p className="text-neutral-400 text-xs font-semibold uppercase tracking-wider mt-1.5">
@@ -275,10 +289,10 @@ export default function StatsSection() {
 
               {/* Icon + copy */}
               <div className="flex items-start gap-3">
-                <div className="w-7 h-7 rounded-lg bg-zeme-gray flex items-center justify-center text-neutral-400 shrink-0 mt-0.5">
+                <div className={`w-7 h-7 rounded-lg ${card.iconBg} flex items-center justify-center ${card.iconColor} shrink-0 mt-0.5`}>
                   <card.Icon />
                 </div>
-                <p className="text-neutral-500 text-[13px] leading-[1.7]">{card.copy}</p>
+                <p className="text-sm text-[#7D7D7D] leading-[1.5] font-medium">{card.copy}</p>
               </div>
             </motion.div>
           ))}
