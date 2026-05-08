@@ -2,8 +2,8 @@ import { lazy, Suspense, useLayoutEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-const StatsSection        = lazy(() => import('./StatsSection'));
-const StickyFeaturesBlock = lazy(() => import('./StickyFeaturesBlock'));
+const StatsSection           = lazy(() => import('./StatsSection'));
+const StickyFeaturesBlockV2  = lazy(() => import('./StickyFeaturesBlockV2'));
 
 const LOTTIE_URL = '/Layout 1.json';
 
@@ -235,7 +235,7 @@ export default function HeroV5() {
       </Suspense>
 
       <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
-        <StickyFeaturesBlock />
+        <StickyFeaturesBlockV2 />
       </Suspense>
     </>
   );
