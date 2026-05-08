@@ -1,6 +1,9 @@
-import { useLayoutEffect, useState } from 'react';
+import { lazy, Suspense, useLayoutEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+const StatsSection        = lazy(() => import('./StatsSection'));
+const StickyFeaturesBlock = lazy(() => import('./StickyFeaturesBlock'));
 
 const LOTTIE_URL = '/Layout 1.json';
 
@@ -50,7 +53,11 @@ function CloudPair() {
 export default function HeroV5() {
   const isDesktop = useIsDesktop();
 
+  // Wrap everything in a fragment so StatsSection + StickyFeaturesBlock
+  // sit below the hero, matching the structure of HeroV1.
+
   return (
+    <>
     <section className="relative z-20 bg-white">
 
       {/* ── MOBILE + TABLET ─────────────────────────────────────────────── */}
@@ -222,5 +229,14 @@ export default function HeroV5() {
       )}
 
     </section>
+
+      <Suspense fallback={<div style={{ minHeight: '600px' }} />}>
+        <StatsSection />
+      </Suspense>
+
+      <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+        <StickyFeaturesBlock />
+      </Suspense>
+    </>
   );
 }

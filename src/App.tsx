@@ -15,8 +15,8 @@ const HeroV3  = lazy(() => import('./HeroV3'));
 const HeroV4  = lazy(() => import('./HeroV4'));
 const HeroV5  = lazy(() => import('./HeroV5'));
 const HeroV6  = lazy(() => import('./HeroV6'));
-// const Footer = lazy(() => import('./Footer')); // original — kept for reference
-const Footer  = lazy(() => import('./FooterNew'));
+const FooterOld = lazy(() => import('./Footer'));     // Layout 1
+const FooterNew = lazy(() => import('./FooterNew'));   // Layout 1 v2 + Layout 3 v2
 
 type Layout = 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'v6';
 
@@ -216,10 +216,17 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Footer only shown on Layout 1 — hidden on v2/v3 until finalised */}
-      {(active === 'v1' || active === 'v5' || active === 'v6') && (
+      {/* Layout 1 uses the original footer */}
+      {active === 'v1' && (
         <Suspense fallback={null}>
-          <Footer />
+          <FooterOld />
+        </Suspense>
+      )}
+
+      {/* Layout 1 v2 and Layout 3 v2 use the new footer */}
+      {(active === 'v5' || active === 'v6') && (
+        <Suspense fallback={null}>
+          <FooterNew />
         </Suspense>
       )}
 
