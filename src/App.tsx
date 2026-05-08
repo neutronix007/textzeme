@@ -13,16 +13,18 @@ import HeroV1 from './HeroV1';
 const HeroV2  = lazy(() => import('./HeroV2'));
 const HeroV3  = lazy(() => import('./HeroV3'));
 const HeroV4  = lazy(() => import('./HeroV4'));
+const HeroV5  = lazy(() => import('./HeroV5'));
 // const Footer = lazy(() => import('./Footer')); // original — kept for reference
 const Footer  = lazy(() => import('./FooterNew'));
 
-type Layout = 'v1' | 'v2' | 'v3' | 'v4';
+type Layout = 'v1' | 'v2' | 'v3' | 'v4' | 'v5';
 
 const layouts: { id: Layout; label: string; sub: string }[] = [
   { id: 'v1', label: 'Layout 1', sub: 'Side-by-side' },
   { id: 'v2', label: 'Layout 2', sub: 'Centered + Carousel' },
   { id: 'v3', label: 'Layout 3', sub: 'Blue hero + Clouds' },
   { id: 'v4', label: 'Layout 4', sub: 'Split + Phone' },
+  { id: 'v5', label: 'Layout 1 v2', sub: 'Layout 1 + Clouds' },
 ];
 
 export default function App() {
@@ -173,7 +175,7 @@ export default function App() {
               <HeroV3 />
             </Suspense>
           </motion.div>
-        ) : (
+        ) : active === 'v4' ? (
           <motion.div
             key="v4"
             initial={{ opacity: 0 }}
@@ -185,11 +187,23 @@ export default function App() {
               <HeroV4 />
             </Suspense>
           </motion.div>
+        ) : (
+          <motion.div
+            key="v5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+              <HeroV5 />
+            </Suspense>
+          </motion.div>
         )}
       </AnimatePresence>
 
       {/* Footer only shown on Layout 1 — hidden on v2/v3 until finalised */}
-      {active === 'v1' && (
+      {(active === 'v1' || active === 'v5') && (
         <Suspense fallback={null}>
           <Footer />
         </Suspense>
