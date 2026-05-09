@@ -10,6 +10,7 @@ const CARDS = [
     body: 'Create and publish listings in minutes.',
     img: '/agents-assets/Listings-for-free.svg',
     alt: 'Listing preview',
+    padded: true,
   },
   {
     Icon: MessagesSquare,
@@ -17,6 +18,7 @@ const CARDS = [
     body: 'Boost to targeted renters straight to their phones',
     img: '/agents-assets/Messages.svg',
     alt: 'Messages preview',
+    padded: true,
   },
   {
     Icon: FileText,
@@ -24,6 +26,7 @@ const CARDS = [
     body: 'Collect everything you need with custom requirements.',
     img: '/agents-assets/Paystubs-employment.svg',
     alt: 'Applications preview',
+    padded: false,
   },
 ];
 
@@ -42,8 +45,9 @@ const LOGOS = [
   { src: '/agents-assets/logos/Signature%20Properties.svg',     alt: 'Signature Properties' },
 ];
 
-// Doubled for seamless infinite loop — same pattern as HeroV2 carousel
-const doubledLogos = [...LOGOS, ...LOGOS];
+// Tripled for bulletproof seamless infinite loop — extra copy prevents
+// any reset flash on mobile renderers (keyframe animates to -33.333%)
+const tripledLogos = [...LOGOS, ...LOGOS, ...LOGOS];
 
 // ── Cloud pair ────────────────────────────────────────────────────────────────
 // Same positioning and sizing as Layout 3's blue box (z-index 0 so cards sit above)
@@ -148,15 +152,26 @@ export default function AgentsPage() {
                   </p>
                 </div>
 
-                {/* SVG preview — full card width, no padding, sits flush at bottom.
-                    No negative margins needed since there's no padding on the outer card. */}
-                <div className="mt-auto">
-                  <img
-                    src={card.img}
-                    alt={card.alt}
-                    className="w-full h-auto block"
-                    draggable={false}
-                  />
+                {/* SVG preview — fixed mt-5 gap from body text (consistent across all cards).
+                    Cards 1 & 2 get px-6 padding matching the text area; Card 3 stays edge-to-edge. */}
+                <div className="mt-5">
+                  {card.padded ? (
+                    <div className="px-6 pb-6">
+                      <img
+                        src={card.img}
+                        alt={card.alt}
+                        className="w-full h-auto block"
+                        draggable={false}
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      src={card.img}
+                      alt={card.alt}
+                      className="w-full h-auto block"
+                      draggable={false}
+                    />
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -192,7 +207,7 @@ export default function AgentsPage() {
           }}
         >
           <div className="flex animate-marquee" style={{ width: 'max-content' }}>
-            {doubledLogos.map((logo, i) => (
+            {tripledLogos.map((logo, i) => (
               <div
                 key={i}
                 className="flex items-center justify-center px-10 shrink-0"
@@ -202,6 +217,7 @@ export default function AgentsPage() {
                   alt={logo.alt}
                   className="h-11 w-auto object-contain"
                   draggable={false}
+                  loading="eager"
                 />
               </div>
             ))}
