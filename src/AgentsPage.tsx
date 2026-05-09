@@ -128,7 +128,7 @@ export default function AgentsPage() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 + i * 0.1 }}
-                className="bg-white rounded-[24px] p-6 flex flex-col overflow-hidden"
+                className="bg-white rounded-[24px] p-6 pb-0 flex flex-col overflow-hidden"
               >
                 {/* Icon badge */}
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-4 shrink-0">
@@ -145,8 +145,8 @@ export default function AgentsPage() {
                   {card.body}
                 </p>
 
-                {/* SVG preview — flush to card edges at bottom */}
-                <div className="mt-auto -mx-2 -mb-2">
+                {/* SVG preview — flush to card edges at bottom, no bottom padding */}
+                <div className="mt-auto -mx-6">
                   <img
                     src={card.img}
                     alt={card.alt}
@@ -157,6 +157,16 @@ export default function AgentsPage() {
               </motion.div>
             ))}
           </div>
+
+          {/* Bottom fade — blends blue panel into white page background */}
+          <div
+            className="absolute bottom-0 left-0 right-0 pointer-events-none"
+            style={{
+              height: 'clamp(60px, 14%, 120px)',
+              background: 'linear-gradient(to bottom, transparent, white)',
+              zIndex: 30,
+            }}
+          />
         </motion.div>
       </div>
 
@@ -181,12 +191,12 @@ export default function AgentsPage() {
             {doubledLogos.map((logo, i) => (
               <div
                 key={i}
-                className="flex items-center justify-center px-8 shrink-0"
+                className="flex items-center justify-center px-10 shrink-0"
               >
                 <img
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-7 w-auto object-contain"
+                  className="h-11 w-auto object-contain"
                   draggable={false}
                 />
               </div>
