@@ -7,7 +7,7 @@ const CARDS = [
   {
     Icon: Home,
     heading: 'List for\nfree',
-    body: 'Create and publish listings in minutes.',
+    body: 'Create and publish\nlistings in minutes.',
     img: '/agents-assets/Listings-for-free.svg',
     alt: 'Listing preview',
     // Left padding only — SVG bleeds past the right edge (clipped by card overflow-hidden)
@@ -125,7 +125,7 @@ export default function AgentsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
-          className="relative overflow-hidden rounded-[32px] md:rounded-[48px] p-[18px] md:p-6"
+          className="relative overflow-hidden rounded-[32px] md:rounded-[48px] p-5 md:p-[26px]"
           style={{ background: '#F0F7FF' }}
         >
           <CloudPair />
@@ -141,9 +141,9 @@ export default function AgentsPage() {
                 className="bg-white rounded-[24px] overflow-hidden flex flex-col"
               >
                 {/* Text section */}
-                <div className="px-6 pt-[23px] pb-[14px] shrink-0">
+                <div className="px-6 pt-[25px] pb-4 shrink-0">
                   {/* Icon badge */}
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-[14px]">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-4">
                     <card.Icon className="w-5 h-5 text-zeme-blue" />
                   </div>
 
@@ -153,7 +153,7 @@ export default function AgentsPage() {
                   </h3>
 
                   {/* Body — matches hero body text size */}
-                  <p className="text-sm md:text-base text-[#7D7D7D] leading-[1.5] font-medium">
+                  <p className="text-sm md:text-base text-[#7D7D7D] leading-[1.5] font-medium whitespace-pre-line">
                     {card.body}
                   </p>
                 </div>
@@ -162,7 +162,7 @@ export default function AgentsPage() {
                     Card 1: left-padded only, SVG bleeds right.
                     Card 2: equal horizontal padding, flush bottom.
                     Card 3: full-bleed edge-to-edge. */}
-                <div className="mt-[14px] overflow-hidden max-h-[167px]">
+                <div className="mt-4 overflow-hidden max-h-[184px]">
                   {card.svgPadding ? (
                     <div className={card.svgPadding}>
                       <img
