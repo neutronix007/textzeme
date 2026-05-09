@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { CalendarDays, Home, MessagesSquare, FileText } from 'lucide-react';
+import { CalendarDays, Home, MessagesSquare, FileText, CircleDollarSign, ShieldCheck } from 'lucide-react';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -10,27 +10,24 @@ const CARDS = [
     body: 'Create and publish\nlistings in minutes.',
     img: '/agents-assets/Listings-for-free.svg',
     alt: 'Listing preview',
-    // Left padding only — SVG bleeds past the right edge (clipped by card overflow-hidden)
     svgPadding: 'pl-6',
     imgClass: 'w-[135%] h-auto block',
   },
   {
     Icon: MessagesSquare,
-    heading: 'Message\nrenters',
-    body: 'Boost to targeted renters straight to their phones',
+    heading: 'Reach the\nright renters',
+    body: 'Connect with the ideal\nrenters for your property.',
     img: '/agents-assets/Messages.svg',
     alt: 'Messages preview',
-    // Equal horizontal padding — SVG sits flush at the bottom
     svgPadding: 'px-6',
     imgClass: 'w-full h-auto block',
   },
   {
     Icon: FileText,
     heading: 'Run full\napplications',
-    body: 'Collect everything you need with custom requirements.',
+    body: 'Collect everything you need\nwith custom requirements.',
     img: '/agents-assets/Paystubs-employment.svg',
     alt: 'Applications preview',
-    // No padding — full bleed edge-to-edge
     svgPadding: null,
     imgClass: 'w-full h-auto block',
   },
@@ -51,12 +48,10 @@ const LOGOS = [
   { src: '/agents-assets/logos/Signature%20Properties.svg',     alt: 'Signature Properties' },
 ];
 
-// Tripled for bulletproof seamless infinite loop — extra copy prevents
-// any reset flash on mobile renderers (keyframe animates to -33.333%)
+// Tripled for bulletproof seamless infinite loop
 const tripledLogos = [...LOGOS, ...LOGOS, ...LOGOS];
 
 // ── Cloud pair ────────────────────────────────────────────────────────────────
-// Same positioning and sizing as Layout 3's blue box (z-index 0 so cards sit above)
 
 function CloudPair() {
   return (
@@ -96,27 +91,78 @@ export default function AgentsPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="max-w-[1400px] mx-auto px-6 text-center pt-4 pb-12"
+        className="max-w-[1400px] mx-auto px-6 text-center pt-4 pb-8"
       >
+        {/* Heading */}
         <h1 className="font-serif italic text-[3.2rem] md:text-[5.5rem] lg:text-[7rem] leading-[0.9] tracking-[-0.035em] bg-gradient-to-b from-[#2b2b2b] to-[#888888] bg-clip-text text-transparent mb-5">
           The easiest way to list,<br />reach, and screen.
         </h1>
 
-        <p className="text-sm md:text-base text-[#7D7D7D] leading-[1.5] font-medium max-w-[480px] mx-auto mb-8">
+        {/* Body — proportional: body/heading = 32/128 = 0.25 */}
+        <p className="text-base md:text-[1.375rem] lg:text-[1.75rem] text-[#7D7D7D] leading-[1.5] font-medium max-w-[480px] mx-auto mb-6">
           List for free. Connect with renters by text instantly.
           <br className="hidden md:block" />
           Run full applications with your own requirements
         </p>
 
+        {/* CTA — rectangle with rounded corners, width matches subtitle block */}
         <motion.button
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-          className="lightsweep-always inline-flex items-center gap-2.5 bg-zeme-blue text-white px-8 py-4 rounded-full font-semibold hover:scale-[1.03] active:scale-[0.97] transition-all shadow-md shadow-zeme-blue/20"
+          className="lightsweep-always flex items-center justify-center gap-3 bg-zeme-blue text-white w-full max-w-[480px] mx-auto py-4 md:py-5 rounded-2xl font-semibold text-base md:text-[1.125rem] lg:text-[1.375rem] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md shadow-zeme-blue/20 mb-4"
         >
-          <CalendarDays className="w-5 h-5 shrink-0" />
+          <CalendarDays className="w-5 h-5 md:w-6 md:h-6 shrink-0" />
           <span>Book a Call</span>
         </motion.button>
+
+        {/* Trust badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
+          className="flex items-center justify-center gap-5 md:gap-8 mb-8"
+        >
+          <span className="flex items-center gap-1.5 text-[#7D7D7D] text-sm lg:text-[1.31rem] font-medium">
+            <CircleDollarSign className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#7D7D7D]" />
+            $100 free credits
+          </span>
+          <span className="flex items-center gap-1.5 text-[#7D7D7D] text-sm lg:text-[1.31rem] font-medium">
+            <ShieldCheck className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#7D7D7D]" />
+            SOC2 Compliant
+          </span>
+        </motion.div>
+
+        {/* Current Customers label */}
+        <p className="text-sm lg:text-[1.31rem] text-[#7D7D7D] font-medium mb-5">Current Customers</p>
+
+        {/* Logo marquee */}
+        <div
+          className="relative overflow-hidden"
+          style={{
+            maskImage:
+              'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+          }}
+        >
+          <div className="flex animate-marquee" style={{ width: 'max-content' }}>
+            {tripledLogos.map((logo, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-center px-5 shrink-0"
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-11 w-auto object-contain"
+                  draggable={false}
+                  loading="eager"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </motion.div>
 
       {/* ── Blue panel + feature cards ───────────────────────────────────── */}
@@ -147,21 +193,18 @@ export default function AgentsPage() {
                     <card.Icon className="w-5 h-5 text-zeme-blue" />
                   </div>
 
-                  {/* Heading */}
-                  <h3 className="font-serif italic text-[1.75rem] md:text-[2rem] leading-[1.0] tracking-[-0.02em] text-neutral-900 mb-2 whitespace-pre-line">
+                  {/* Heading — proportional: card heading/hero = 40/128 = 0.3125 */}
+                  <h3 className="font-serif italic text-[1.75rem] md:text-[2rem] lg:text-[2.2rem] leading-[1.0] tracking-[-0.02em] text-neutral-900 mb-2 whitespace-pre-line">
                     {card.heading}
                   </h3>
 
-                  {/* Body — matches hero body text size */}
-                  <p className="text-sm md:text-base text-[#7D7D7D] leading-[1.5] font-medium whitespace-pre-line">
+                  {/* Body — proportional: card body/hero = 24/128 = 0.1875 */}
+                  <p className="text-sm md:text-base lg:text-[1.31rem] text-[#7D7D7D] leading-[1.5] font-medium whitespace-pre-line">
                     {card.body}
                   </p>
                 </div>
 
-                {/* SVG preview — fixed mt-3 gap, capped height to keep blue box compact.
-                    Card 1: left-padded only, SVG bleeds right.
-                    Card 2: equal horizontal padding, flush bottom.
-                    Card 3: full-bleed edge-to-edge. */}
+                {/* SVG preview */}
                 <div className="mt-4 overflow-hidden max-h-[184px]">
                   {card.svgPadding ? (
                     <div className={card.svgPadding}>
@@ -185,7 +228,7 @@ export default function AgentsPage() {
             ))}
           </div>
 
-          {/* Bottom fade — blends blue panel into white page background */}
+          {/* Bottom fade */}
           <div
             className="absolute bottom-0 left-0 right-0 pointer-events-none"
             style={{
@@ -195,42 +238,6 @@ export default function AgentsPage() {
             }}
           />
         </motion.div>
-      </div>
-
-      {/* ── Logo strip ───────────────────────────────────────────────────── */}
-      <div className="pb-16 text-center">
-        <p className="text-sm text-[#7D7D7D] font-medium mb-1">Current Customers</p>
-        <p className="text-base font-semibold text-neutral-900 mb-8">
-          1,000+ brokerages &amp; MLS
-        </p>
-
-        {/* Marquee — same mask + animate-marquee as HeroV2 carousel */}
-        <div
-          className="relative overflow-hidden"
-          style={{
-            maskImage:
-              'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-            WebkitMaskImage:
-              'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-          }}
-        >
-          <div className="flex animate-marquee" style={{ width: 'max-content' }}>
-            {tripledLogos.map((logo, i) => (
-              <div
-                key={i}
-                className="flex items-center justify-center px-10 shrink-0"
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-11 w-auto object-contain"
-                  draggable={false}
-                  loading="eager"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
     </div>
