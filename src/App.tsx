@@ -14,11 +14,12 @@ const HeroV2  = lazy(() => import('./HeroV2'));
 const HeroV3  = lazy(() => import('./HeroV3'));
 const HeroV4  = lazy(() => import('./HeroV4'));
 const HeroV5  = lazy(() => import('./HeroV5'));
-const HeroV6  = lazy(() => import('./HeroV6'));
-const FooterOld = lazy(() => import('./Footer'));     // Layout 1
-const FooterNew = lazy(() => import('./FooterNew'));   // Layout 1 v2 + Layout 3 v2
+const HeroV6      = lazy(() => import('./HeroV6'));
+const AgentsPage  = lazy(() => import('./AgentsPage'));
+const FooterOld   = lazy(() => import('./Footer'));     // Layout 1
+const FooterNew   = lazy(() => import('./FooterNew'));   // Layout 1 v2 + Layout 3 v2
 
-type Layout = 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'v6';
+type Layout = 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'v6' | 'agents';
 
 const layouts: { id: Layout; label: string; sub: string }[] = [
   { id: 'v1', label: 'Layout 1', sub: 'Side-by-side' },
@@ -53,45 +54,69 @@ export default function App() {
           />
         </a>
 
-        {/* Desktop dropdown */}
+        {/* Desktop nav — swaps to "For Renters" pill when on the agents page */}
         <div className="hidden md:block relative">
-          <button
-            onClick={() => setDropdownOpen(o => !o)}
-            className="bg-zeme-gray px-5 py-2.5 rounded-full text-sm font-semibold text-neutral-900 hover:bg-neutral-200 transition-colors flex items-center gap-2"
-          >
-            For Agents &amp; Landlords
-            <ChevronDown
-              className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
-            />
-          </button>
-
-          <AnimatePresence>
-            {dropdownOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -8, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0,  scale: 1 }}
-                exit={{ opacity: 0, y: -8, scale: 0.97 }}
-                transition={{ duration: 0.15 }}
-                className="absolute right-0 top-full mt-2 bg-white rounded-2xl shadow-xl border border-neutral-100 py-2 min-w-[220px]"
+          {active === 'agents' ? (
+            <button
+              onClick={() => select('v1')}
+              className="bg-zeme-gray px-5 py-2.5 rounded-full text-sm font-semibold text-neutral-900 hover:bg-neutral-200 transition-colors"
+            >
+              For Renters and Tenants
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={() => setDropdownOpen(o => !o)}
+                className="bg-zeme-gray px-5 py-2.5 rounded-full text-sm font-semibold text-neutral-900 hover:bg-neutral-200 transition-colors flex items-center gap-2"
               >
-                <p className="px-4 pt-1 pb-2 text-[11px] font-semibold uppercase tracking-widest text-neutral-400">
-                  Hero Layouts
-                </p>
-                {layouts.map(l => (
-                  <button
-                    key={l.id}
-                    onClick={() => select(l.id)}
-                    className={`w-full text-left px-4 py-2.5 flex items-center justify-between transition-colors rounded-lg mx-0 hover:bg-neutral-50 ${
-                      active === l.id ? 'text-zeme-blue' : 'text-neutral-700'
-                    }`}
+                For Agents &amp; Landlords
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0,  scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full mt-2 bg-white rounded-2xl shadow-xl border border-neutral-100 py-2 min-w-[220px]"
                   >
-                    <span className="font-semibold text-sm">{l.label}</span>
-                    <span className="text-xs text-neutral-400">{l.sub}</span>
-                  </button>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                    <p className="px-4 pt-1 pb-2 text-[11px] font-semibold uppercase tracking-widest text-neutral-400">
+                      Hero Layouts
+                    </p>
+                    {layouts.map(l => (
+                      <button
+                        key={l.id}
+                        onClick={() => select(l.id)}
+                        className={`w-full text-left px-4 py-2.5 flex items-center justify-between transition-colors rounded-lg hover:bg-neutral-50 ${
+                          active === l.id ? 'text-zeme-blue' : 'text-neutral-700'
+                        }`}
+                      >
+                        <span className="font-semibold text-sm">{l.label}</span>
+                        <span className="text-xs text-neutral-400">{l.sub}</span>
+                      </button>
+                    ))}
+                    {/* Pages divider */}
+                    <div className="border-t border-neutral-100 mt-1 pt-1">
+                      <p className="px-4 pt-2 pb-1 text-[11px] font-semibold uppercase tracking-widest text-neutral-400">
+                        Pages
+                      </p>
+                      <button
+                        onClick={() => select('agents')}
+                        className="w-full text-left px-4 py-2.5 flex items-center justify-between transition-colors rounded-lg hover:bg-neutral-50 text-neutral-700"
+                      >
+                        <span className="font-semibold text-sm">Agents Page</span>
+                        <span className="text-xs text-neutral-400">For Agents &amp; Landlords</span>
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
+          )}
         </div>
 
         {/* Mobile hamburger */}
@@ -137,6 +162,22 @@ export default function App() {
                 </span>
               </button>
             ))}
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-neutral-400 px-2 pt-3 pb-1">
+              Pages
+            </p>
+            <button
+              onClick={() => select('agents')}
+              className={`flex w-full items-center justify-between px-5 py-3 rounded-full text-sm font-semibold transition-colors ${
+                active === 'agents'
+                  ? 'bg-zeme-blue text-white'
+                  : 'bg-zeme-gray text-neutral-900 hover:bg-neutral-200'
+              }`}
+            >
+              <span>Agents Page</span>
+              <span className={`text-xs font-normal ${active === 'agents' ? 'text-white/70' : 'text-neutral-400'}`}>
+                For Agents &amp; Landlords
+              </span>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -201,7 +242,7 @@ export default function App() {
               <HeroV5 />
             </Suspense>
           </motion.div>
-        ) : (
+        ) : active === 'v6' ? (
           <motion.div
             key="v6"
             initial={{ opacity: 0 }}
@@ -211,6 +252,18 @@ export default function App() {
           >
             <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
               <HeroV6 />
+            </Suspense>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="agents"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+              <AgentsPage />
             </Suspense>
           </motion.div>
         )}
