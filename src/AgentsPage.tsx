@@ -98,10 +98,9 @@ export default function AgentsPage() {
           The easiest way to list,<br />reach, and screen.
         </h1>
 
-        {/* Body — proportional: body/heading = 32/128 = 0.25 */}
-        <p className="text-base md:text-[1.375rem] lg:text-[1.75rem] text-[#7D7D7D] leading-[1.5] font-medium max-w-[480px] mx-auto mb-6">
-          List for free. Connect with renters by text instantly.
-          <br className="hidden md:block" />
+        {/* Body — proportional: body/heading = 32/128 = 0.25. Max-width scales with font so it stays 2 lines. */}
+        <p className="text-base md:text-[1.375rem] lg:text-[1.75rem] text-[#7D7D7D] leading-[1.5] font-medium max-w-[480px] md:max-w-[540px] lg:max-w-[640px] mx-auto mb-6">
+          List for free. Connect with renters by text instantly.<br />
           Run full applications with your own requirements
         </p>
 
@@ -123,18 +122,22 @@ export default function AgentsPage() {
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
           className="flex items-center justify-center gap-5 md:gap-8 mb-8"
         >
-          <span className="flex items-center gap-1.5 text-[#7D7D7D] text-sm lg:text-[1.31rem] font-medium">
-            <CircleDollarSign className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#7D7D7D]" />
+          <span className="flex items-center gap-1.5 text-[#C9C9C9] text-sm lg:text-[1.31rem] font-medium">
+            <CircleDollarSign className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#C9C9C9]" />
             $100 free credits
           </span>
-          <span className="flex items-center gap-1.5 text-[#7D7D7D] text-sm lg:text-[1.31rem] font-medium">
-            <ShieldCheck className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#7D7D7D]" />
+          <span className="flex items-center gap-1.5 text-[#C9C9C9] text-sm lg:text-[1.31rem] font-medium">
+            <ShieldCheck className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#C9C9C9]" />
             SOC2 Compliant
           </span>
         </motion.div>
 
-        {/* Current Customers label */}
-        <p className="text-sm lg:text-[1.31rem] text-[#7D7D7D] font-medium mb-5">Current Customers</p>
+        {/* Current Customers label with gradient divider lines */}
+        <div className="flex items-center gap-4 mb-5 max-w-[640px] mx-auto">
+          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, #ffffff, #e2e2e2)' }} />
+          <p className="text-sm lg:text-[1.31rem] text-[#7D7D7D] font-medium whitespace-nowrap">Current Customers</p>
+          <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, #e2e2e2, #ffffff)' }} />
+        </div>
 
         {/* Logo marquee */}
         <div
