@@ -1,11 +1,11 @@
 import { motion } from 'motion/react';
-import { CalendarDays, LayoutGrid, MessagesSquare, FileText } from 'lucide-react';
+import { CalendarDays, Home, MessagesSquare, FileText } from 'lucide-react';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
 const CARDS = [
   {
-    Icon: LayoutGrid,
+    Icon: Home,
     heading: 'List for\nfree',
     body: 'Create and publish listings in minutes.',
     img: '/agents-assets/Listings-for-free.svg',
@@ -102,7 +102,7 @@ export default function AgentsPage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-          className="lightsweep inline-flex items-center gap-2.5 bg-zeme-blue text-white px-8 py-4 rounded-full font-semibold hover:scale-[1.03] active:scale-[0.97] transition-all shadow-md shadow-zeme-blue/20"
+          className="lightsweep-always inline-flex items-center gap-2.5 bg-zeme-blue text-white px-8 py-4 rounded-full font-semibold hover:scale-[1.03] active:scale-[0.97] transition-all shadow-md shadow-zeme-blue/20"
         >
           <CalendarDays className="w-5 h-5 shrink-0" />
           <span>Book a Call</span>
@@ -128,25 +128,29 @@ export default function AgentsPage() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 + i * 0.1 }}
-                className="bg-white rounded-[24px] p-6 pb-0 flex flex-col overflow-hidden"
+                className="bg-white rounded-[24px] overflow-hidden flex flex-col"
               >
-                {/* Icon badge */}
-                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-4 shrink-0">
-                  <card.Icon className="w-5 h-5 text-zeme-blue" />
+                {/* Text section — padded, shrinks to its natural height */}
+                <div className="px-6 pt-6 pb-5 shrink-0">
+                  {/* Icon badge */}
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-4">
+                    <card.Icon className="w-5 h-5 text-zeme-blue" />
+                  </div>
+
+                  {/* Heading */}
+                  <h3 className="font-serif italic text-[1.75rem] md:text-[2rem] leading-[1.0] tracking-[-0.02em] text-neutral-900 mb-2 whitespace-pre-line">
+                    {card.heading}
+                  </h3>
+
+                  {/* Body */}
+                  <p className="text-sm text-[#7D7D7D] leading-[1.5] font-medium">
+                    {card.body}
+                  </p>
                 </div>
 
-                {/* Heading */}
-                <h3 className="font-serif italic text-[1.75rem] md:text-[2rem] leading-[1.0] tracking-[-0.02em] text-neutral-900 mb-2 whitespace-pre-line">
-                  {card.heading}
-                </h3>
-
-                {/* Body */}
-                <p className="text-sm text-[#7D7D7D] leading-[1.5] font-medium mb-5">
-                  {card.body}
-                </p>
-
-                {/* SVG preview — flush to card edges at bottom, no bottom padding */}
-                <div className="mt-auto -mx-6">
+                {/* SVG preview — full card width, no padding, sits flush at bottom.
+                    No negative margins needed since there's no padding on the outer card. */}
+                <div className="mt-auto">
                   <img
                     src={card.img}
                     alt={card.alt}

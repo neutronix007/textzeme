@@ -120,6 +120,23 @@
     animation: sweep 1.2s infinite;
   }
 
+  /* Always-sweeping variant — no hover required, attracts attention */
+  .lightsweep-always {
+    @apply relative overflow-hidden;
+  }
+  .lightsweep-always::after {
+    content: "";
+    @apply absolute top-0 -left-full w-1/2 h-full;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.45) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    animation: sweep 2s ease-in-out infinite;
+  }
+
   /* Light-background card variant — subtle blue-tinted shimmer */
   .lightsweep-card {
     @apply relative overflow-hidden;
