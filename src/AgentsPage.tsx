@@ -98,9 +98,8 @@ export default function AgentsPage() {
           The easiest way to list,<br />reach, and screen.
         </h1>
 
-        {/* Body — max-width grows with font size so each sentence fits on one line at md/lg.
-            <br> is hidden on mobile (text flows freely) and visible md+ to enforce 2 lines. */}
-        <p className="text-base md:text-[1.375rem] lg:text-[1.75rem] text-[#7D7D7D] leading-[1.5] font-medium max-w-[420px] md:max-w-[700px] lg:max-w-[900px] mx-auto mb-6">
+        {/* Body — same size as card body text for consistent rhythm across the page */}
+        <p className="text-sm md:text-base lg:text-[1.31rem] text-[#7D7D7D] leading-[1.5] font-medium max-w-[420px] md:max-w-[520px] lg:max-w-[640px] mx-auto mb-6">
           List for free. Connect with renters by text instantly.<br className="hidden md:block" />
           Run full applications with your own requirements
         </p>
