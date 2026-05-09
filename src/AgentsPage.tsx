@@ -10,7 +10,9 @@ const CARDS = [
     body: 'Create and publish listings in minutes.',
     img: '/agents-assets/Listings-for-free.svg',
     alt: 'Listing preview',
-    padded: true,
+    // Left padding only — SVG bleeds past the right edge (clipped by card overflow-hidden)
+    svgPadding: 'pl-6',
+    imgClass: 'w-[135%] h-auto block',
   },
   {
     Icon: MessagesSquare,
@@ -18,7 +20,9 @@ const CARDS = [
     body: 'Boost to targeted renters straight to their phones',
     img: '/agents-assets/Messages.svg',
     alt: 'Messages preview',
-    padded: true,
+    // Equal horizontal padding — SVG sits flush at the bottom
+    svgPadding: 'px-6',
+    imgClass: 'w-full h-auto block',
   },
   {
     Icon: FileText,
@@ -26,7 +30,9 @@ const CARDS = [
     body: 'Collect everything you need with custom requirements.',
     img: '/agents-assets/Paystubs-employment.svg',
     alt: 'Applications preview',
-    padded: false,
+    // No padding — full bleed edge-to-edge
+    svgPadding: null,
+    imgClass: 'w-full h-auto block',
   },
 ];
 
@@ -119,7 +125,7 @@ export default function AgentsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
-          className="relative overflow-hidden rounded-[32px] md:rounded-[48px] p-5 md:p-7"
+          className="relative overflow-hidden rounded-[32px] md:rounded-[48px] p-4 md:p-5"
           style={{ background: '#F0F7FF' }}
         >
           <CloudPair />
@@ -134,10 +140,10 @@ export default function AgentsPage() {
                 transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 + i * 0.1 }}
                 className="bg-white rounded-[24px] overflow-hidden flex flex-col"
               >
-                {/* Text section — padded, shrinks to its natural height */}
-                <div className="px-6 pt-6 pb-5 shrink-0">
+                {/* Text section */}
+                <div className="px-6 pt-5 pb-3 shrink-0">
                   {/* Icon badge */}
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-3">
                     <card.Icon className="w-5 h-5 text-zeme-blue" />
                   </div>
 
@@ -146,21 +152,23 @@ export default function AgentsPage() {
                     {card.heading}
                   </h3>
 
-                  {/* Body */}
-                  <p className="text-sm text-[#7D7D7D] leading-[1.5] font-medium">
+                  {/* Body — matches hero body text size */}
+                  <p className="text-sm md:text-base text-[#7D7D7D] leading-[1.5] font-medium">
                     {card.body}
                   </p>
                 </div>
 
-                {/* SVG preview — fixed mt-5 gap from body text (consistent across all cards).
-                    Cards 1 & 2 get px-6 padding matching the text area; Card 3 stays edge-to-edge. */}
-                <div className="mt-5">
-                  {card.padded ? (
-                    <div className="px-6 pb-6">
+                {/* SVG preview — fixed mt-3 gap, capped height to keep blue box compact.
+                    Card 1: left-padded only, SVG bleeds right.
+                    Card 2: equal horizontal padding, flush bottom.
+                    Card 3: full-bleed edge-to-edge. */}
+                <div className="mt-3 overflow-hidden max-h-[145px]">
+                  {card.svgPadding ? (
+                    <div className={card.svgPadding}>
                       <img
                         src={card.img}
                         alt={card.alt}
-                        className="w-full h-auto block"
+                        className={card.imgClass}
                         draggable={false}
                       />
                     </div>
@@ -168,7 +176,7 @@ export default function AgentsPage() {
                     <img
                       src={card.img}
                       alt={card.alt}
-                      className="w-full h-auto block"
+                      className={card.imgClass}
                       draggable={false}
                     />
                   )}
