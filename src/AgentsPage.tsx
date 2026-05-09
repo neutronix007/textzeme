@@ -98,9 +98,10 @@ export default function AgentsPage() {
           The easiest way to list,<br />reach, and screen.
         </h1>
 
-        {/* Body — proportional: body/heading = 32/128 = 0.25. Max-width scales with font so it stays 2 lines. */}
-        <p className="text-base md:text-[1.375rem] lg:text-[1.75rem] text-[#7D7D7D] leading-[1.5] font-medium max-w-[480px] md:max-w-[540px] lg:max-w-[640px] mx-auto mb-6">
-          List for free. Connect with renters by text instantly.<br />
+        {/* Body — max-width grows with font size so each sentence fits on one line at md/lg.
+            <br> is hidden on mobile (text flows freely) and visible md+ to enforce 2 lines. */}
+        <p className="text-base md:text-[1.375rem] lg:text-[1.75rem] text-[#7D7D7D] leading-[1.5] font-medium max-w-[420px] md:max-w-[700px] lg:max-w-[900px] mx-auto mb-6">
+          List for free. Connect with renters by text instantly.<br className="hidden md:block" />
           Run full applications with your own requirements
         </p>
 
