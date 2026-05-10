@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { CalendarDots, House, ChatCircleDots, Files, CurrencyDollar, ShieldCheck } from '@phosphor-icons/react';
+import { CalendarDots, House, ChatCircleDots, Files, CurrencyCircleDollar, ShieldCheck } from '@phosphor-icons/react';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -111,7 +111,7 @@ export default function AgentsPage() {
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
           className="lightsweep-always flex items-center justify-center gap-3 bg-zeme-blue text-white w-full max-w-[480px] mx-auto py-4 md:py-5 rounded-2xl font-semibold text-base md:text-[1.125rem] lg:text-[1.375rem] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md shadow-zeme-blue/20 mb-4"
         >
-          <CalendarDots weight="regular" className="w-5 h-5 md:w-6 md:h-6 shrink-0" />
+          <CalendarDots weight="bold" className="w-[35px] h-[35px] shrink-0" />
           <span>Book a Call</span>
         </motion.button>
 
@@ -123,11 +123,11 @@ export default function AgentsPage() {
           className="flex items-center justify-center gap-5 md:gap-8 mb-8"
         >
           <span className="flex items-center gap-1.5 text-[#C9C9C9] text-sm lg:text-[1.31rem] font-medium">
-            <CurrencyDollar weight="regular" className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#C9C9C9]" />
+            <CurrencyCircleDollar weight="bold" className="w-7 h-7 shrink-0 text-[#C9C9C9]" />
             $100 free credits
           </span>
           <span className="flex items-center gap-1.5 text-[#C9C9C9] text-sm lg:text-[1.31rem] font-medium">
-            <ShieldCheck weight="regular" className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#C9C9C9]" />
+            <ShieldCheck weight="bold" className="w-7 h-7 shrink-0 text-[#C9C9C9]" />
             SOC2 Compliant
           </span>
         </motion.div>
@@ -192,8 +192,8 @@ export default function AgentsPage() {
                 {/* Text section */}
                 <div className="px-6 pt-[25px] pb-4 shrink-0">
                   {/* Icon badge */}
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-4">
-                    <card.Icon weight="regular" className="w-5 h-5 text-zeme-blue" />
+                  <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-4">
+                    <card.Icon weight="bold" className="w-[35px] h-[35px] text-zeme-blue" />
                   </div>
 
                   {/* Heading — proportional: card heading/hero = 40/128 = 0.3125 */}
