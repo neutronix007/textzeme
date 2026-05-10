@@ -1,4 +1,5 @@
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { useRef, useEffect, useState } from 'react';
 import { CalendarDots, House, ChatCircleDots, Files, CurrencyCircleDollar, ShieldCheck } from '@phosphor-icons/react';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
@@ -83,6 +84,20 @@ function CloudPair() {
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AgentsPage() {
+  const ctaRef = useRef<HTMLButtonElement>(null);
+  const [showSticky, setShowSticky] = useState(false);
+
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowSticky(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="bg-white">
 
@@ -106,6 +121,7 @@ export default function AgentsPage() {
 
         {/* CTA — rectangle with rounded corners, width matches subtitle block */}
         <motion.button
+          ref={ctaRef}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
@@ -242,6 +258,26 @@ export default function AgentsPage() {
           />
         </motion.div>
       </div>
+
+      {/* ── Sticky mobile CTA ────────────────────────────────────────────── */}
+      {/* Slides up from bottom when original button scrolls off-screen,
+          hidden on md+ since desktop doesn't need it */}
+      <AnimatePresence>
+        {showSticky && (
+          <motion.div
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
+          >
+            <button className="lightsweep-always flex items-center justify-center gap-2.5 bg-zeme-blue text-white px-8 py-4 rounded-2xl font-semibold text-base shadow-xl shadow-zeme-blue/30 active:scale-[0.97] transition-transform whitespace-nowrap">
+              <CalendarDots weight="bold" className="w-[26px] h-[26px] shrink-0" />
+              <span>Book a Call</span>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
