@@ -1,11 +1,11 @@
 import { motion } from 'motion/react';
-import { CalendarDays, Home, MessagesSquare, FileText, CircleDollarSign, ShieldCheck } from 'lucide-react';
+import { CalendarDots, House, ChatCircleDots, Files, CurrencyDollar, ShieldCheck } from '@phosphor-icons/react';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
 const CARDS = [
   {
-    Icon: Home,
+    Icon: House,
     heading: 'List for\nfree',
     body: 'Create and publish\nlistings in minutes.',
     img: '/agents-assets/Listings-for-free.svg',
@@ -14,7 +14,7 @@ const CARDS = [
     imgClass: 'w-[135%] h-auto block',
   },
   {
-    Icon: MessagesSquare,
+    Icon: ChatCircleDots,
     heading: 'Reach the\nright renters',
     body: 'Connect with the ideal\nrenters for your property.',
     img: '/agents-assets/Messages.svg',
@@ -23,7 +23,7 @@ const CARDS = [
     imgClass: 'w-full h-auto block',
   },
   {
-    Icon: FileText,
+    Icon: Files,
     heading: 'Run full\napplications',
     body: 'Collect everything you need\nwith custom requirements.',
     img: '/agents-assets/Paystubs-employment.svg',
@@ -111,7 +111,7 @@ export default function AgentsPage() {
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
           className="lightsweep-always flex items-center justify-center gap-3 bg-zeme-blue text-white w-full max-w-[480px] mx-auto py-4 md:py-5 rounded-2xl font-semibold text-base md:text-[1.125rem] lg:text-[1.375rem] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md shadow-zeme-blue/20 mb-4"
         >
-          <CalendarDays className="w-5 h-5 md:w-6 md:h-6 shrink-0" />
+          <CalendarDots weight="regular" className="w-5 h-5 md:w-6 md:h-6 shrink-0" />
           <span>Book a Call</span>
         </motion.button>
 
@@ -123,11 +123,11 @@ export default function AgentsPage() {
           className="flex items-center justify-center gap-5 md:gap-8 mb-8"
         >
           <span className="flex items-center gap-1.5 text-[#C9C9C9] text-sm lg:text-[1.31rem] font-medium">
-            <CircleDollarSign className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#C9C9C9]" />
+            <CurrencyDollar weight="regular" className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#C9C9C9]" />
             $100 free credits
           </span>
           <span className="flex items-center gap-1.5 text-[#C9C9C9] text-sm lg:text-[1.31rem] font-medium">
-            <ShieldCheck className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#C9C9C9]" />
+            <ShieldCheck weight="regular" className="w-4 h-4 lg:w-5 lg:h-5 shrink-0 text-[#C9C9C9]" />
             SOC2 Compliant
           </span>
         </motion.div>
@@ -158,7 +158,7 @@ export default function AgentsPage() {
                 <img
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-11 w-auto object-contain"
+                  className="h-[63px] w-auto object-contain"
                   draggable={false}
                   loading="eager"
                 />
@@ -193,7 +193,7 @@ export default function AgentsPage() {
                 <div className="px-6 pt-[25px] pb-4 shrink-0">
                   {/* Icon badge */}
                   <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-4">
-                    <card.Icon className="w-5 h-5 text-zeme-blue" />
+                    <card.Icon weight="regular" className="w-5 h-5 text-zeme-blue" />
                   </div>
 
                   {/* Heading — proportional: card heading/hero = 40/128 = 0.3125 */}
