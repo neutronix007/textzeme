@@ -88,6 +88,19 @@
   animation-play-state: paused;
 }
 
+/* Right-direction variant for alternating rows */
+@keyframes marquee-right {
+  from { transform: translateX(-33.333%); }
+  to   { transform: translateX(0); }
+}
+.animate-marquee-right {
+  animation: marquee-right 40s linear infinite;
+  will-change: transform;
+}
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
 /* ── Footer grid background ────────────────────────────────────── */
 .footer-bg-grid {
   background-size: 60px 60px;

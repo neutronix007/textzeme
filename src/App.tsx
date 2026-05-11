@@ -15,11 +15,12 @@ const HeroV3  = lazy(() => import('./HeroV3'));
 const HeroV4  = lazy(() => import('./HeroV4'));
 const HeroV5  = lazy(() => import('./HeroV5'));
 const HeroV6      = lazy(() => import('./HeroV6'));
-const AgentsPage  = lazy(() => import('./AgentsPage'));
+const AgentsPage   = lazy(() => import('./AgentsPage'));
+const AgentsPageV2 = lazy(() => import('./AgentsPageV2'));
 const FooterOld   = lazy(() => import('./Footer'));     // Layout 1
 const FooterNew   = lazy(() => import('./FooterNew'));   // Layout 1 v2 + Layout 3 v2
 
-type Layout = 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'v6' | 'agents';
+type Layout = 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'v6' | 'agents' | 'agents-v2';
 
 const layouts: { id: Layout; label: string; sub: string }[] = [
   { id: 'v1', label: 'Layout 1', sub: 'Side-by-side' },
@@ -54,9 +55,9 @@ export default function App() {
           />
         </a>
 
-        {/* Desktop nav — swaps to "For Renters" pill when on the agents page */}
+        {/* Desktop nav — swaps to "For Renters" pill when on either agents page */}
         <div className="hidden md:block relative">
-          {active === 'agents' ? (
+          {(active === 'agents' || active === 'agents-v2') ? (
             <button
               onClick={() => select('v1')}
               className="bg-zeme-gray px-5 py-2.5 rounded-full text-sm font-semibold text-neutral-900 hover:bg-neutral-200 transition-colors"
@@ -110,6 +111,13 @@ export default function App() {
                       >
                         <span className="font-semibold text-sm">Agents Page</span>
                         <span className="text-xs text-neutral-400">For Agents &amp; Landlords</span>
+                      </button>
+                      <button
+                        onClick={() => select('agents-v2')}
+                        className="w-full text-left px-4 py-2.5 flex items-center justify-between transition-colors rounded-lg hover:bg-neutral-50 text-neutral-700"
+                      >
+                        <span className="font-semibold text-sm">Agents Page v2</span>
+                        <span className="text-xs text-neutral-400">Mobile logo rows</span>
                       </button>
                     </div>
                   </motion.div>
@@ -176,6 +184,19 @@ export default function App() {
               <span>Agents Page</span>
               <span className={`text-xs font-normal ${active === 'agents' ? 'text-white/70' : 'text-neutral-400'}`}>
                 For Agents &amp; Landlords
+              </span>
+            </button>
+            <button
+              onClick={() => select('agents-v2')}
+              className={`flex w-full items-center justify-between px-5 py-3 rounded-full text-sm font-semibold transition-colors ${
+                active === 'agents-v2'
+                  ? 'bg-zeme-blue text-white'
+                  : 'bg-zeme-gray text-neutral-900 hover:bg-neutral-200'
+              }`}
+            >
+              <span>Agents Page v2</span>
+              <span className={`text-xs font-normal ${active === 'agents-v2' ? 'text-white/70' : 'text-neutral-400'}`}>
+                Mobile logo rows
               </span>
             </button>
           </motion.div>
@@ -254,7 +275,7 @@ export default function App() {
               <HeroV6 />
             </Suspense>
           </motion.div>
-        ) : (
+        ) : active === 'agents' ? (
           <motion.div
             key="agents"
             initial={{ opacity: 0 }}
@@ -264,6 +285,18 @@ export default function App() {
           >
             <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
               <AgentsPage />
+            </Suspense>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="agents-v2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+              <AgentsPageV2 />
             </Suspense>
           </motion.div>
         )}
