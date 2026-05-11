@@ -141,7 +141,7 @@ export default function AgentsPageV2() {
 
         {/* Body */}
         <p className="text-sm md:text-base lg:text-[1.31rem] text-[#7D7D7D] leading-[1.5] font-medium max-w-[420px] md:max-w-[520px] lg:max-w-[640px] mx-auto mb-6">
-          List for free. Connect with renters by text instantly.<br className="hidden md:block" />
+          List for free.<br className="md:hidden" /> Connect with renters by text instantly.<br className="hidden md:block" />
           Run full applications with your own requirements
         </p>
 
@@ -151,7 +151,7 @@ export default function AgentsPageV2() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-          className="lightsweep-always flex items-center justify-center gap-3 bg-zeme-blue text-white w-full max-w-[300px] md:max-w-[480px] mx-auto py-3 md:py-5 rounded-2xl font-semibold text-sm md:text-[1.125rem] lg:text-[1.375rem] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md shadow-zeme-blue/20 mb-4"
+          className="lightsweep-always flex items-center justify-center gap-3 bg-zeme-blue text-white w-full max-w-[300px] md:max-w-[480px] mx-auto py-3 md:py-5 rounded-lg md:rounded-2xl font-semibold text-sm md:text-[1.125rem] lg:text-[1.375rem] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md shadow-zeme-blue/20 mb-4"
         >
           <CalendarDots weight="bold" className="w-[22px] h-[22px] md:w-[35px] md:h-[35px] shrink-0" />
           <span>Book a Call</span>
@@ -162,7 +162,7 @@ export default function AgentsPageV2() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
-          className="flex items-center justify-center gap-5 md:gap-8 mb-14 md:mb-8"
+          className="flex items-center justify-center gap-5 md:gap-8 mb-20 md:mb-8"
         >
           <span className="flex items-center gap-1.5 text-[#C9C9C9] text-sm lg:text-[1.31rem] font-medium">
             <CurrencyCircleDollar weight="bold" className="w-7 h-7 shrink-0 text-[#C9C9C9]" />
