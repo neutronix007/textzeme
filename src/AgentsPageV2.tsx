@@ -221,7 +221,7 @@ export default function AgentsPageV2() {
                       <img
                         src={logo.src}
                         alt={logo.alt}
-                        className="h-10 w-auto object-contain"
+                        className="h-[63px] w-auto object-contain"
                         draggable={false}
                         loading="eager"
                       />
